@@ -61,8 +61,32 @@ npm run build && npm start
 
 ## 🛠️ API Endpoints
 
+
+###**To Test Endpoint use postman collection available at src/postman_collcetion/category_management_postman_collection.json**
+
+### **1. Create a User**
+**POST** `/api/v1/register`
+```json
+{
+    "first_name":"Bhargav",
+    "last_name": "Valani",
+    "email": "bhargavvalani01@gmail.com",
+    "password": "Test@123"
+}
+```
+
+### **1. Login a User**
+**POST** `/api/v1/register`
+```json
+{
+    "email": "bhargavvalani01@gmail.com",
+    "password": "Test@123"
+}
+```
+
+
 ### **1. Create a Category**
-**POST** `/api/categories`
+**POST** `/api/v1/category`
 ```json
 {
   "name": "Electronics",
@@ -71,13 +95,13 @@ npm run build && npm start
 ```
 
 ### **2. Get All Categories (Tree Structure)**
-**GET** `/api/categories/tree`
+**GET** `/api/v1/category/tree`
 
 ### **3. Get a Category by ID**
-**GET** `/api/categories/:id`
+**GET** `/api/v1/category/:id`
 
 ### **4. Update a Category**
-**PATCH** `/api/categories/:id`
+**PATCH** `/api/v1/category/:id`
 ```json
 {
   "name": "Updated Name",
@@ -86,7 +110,7 @@ npm run build && npm start
 ```
 
 ### **5. Delete a Category**
-**DELETE** `/api/categories/:id`
+**DELETE** `/api/category/:id`
 
 ---
 

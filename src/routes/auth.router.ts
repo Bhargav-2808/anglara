@@ -6,6 +6,4 @@ export const authRouter = Router();
 
 authRouter.post('/verify-token', authenticateUser, verifyToken);
 authRouter.post('/sign-in', singIn);
-
-
 authRouter.post('/register', signUp);

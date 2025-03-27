@@ -12,7 +12,7 @@ export type CategoryModel = Model<CategoryDocument>;
 
 const CategorySchema = new Schema<CategoryDocument>({
   name: { type: String, required: true },
-  parent: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: null },
+  parent: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: null, index: true },
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
   created_at: {
     type: Date,

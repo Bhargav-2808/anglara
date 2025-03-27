@@ -18,40 +18,73 @@ export const createCategory = async (name: string, parent?: string | null) => {
 };
 
 export const getCategoryTree = async (): Promise<CategoryTree[]> => {
-  const categories = await Category.find().lean(); 
+  const categories = await Category.aggregate([
+    {
+      $graphLookup: {
+        from: "categories", 
+        startWith: "$_id",
+        connectFromField: "_id",
+        connectToField: "parent",
+        as: "children",
+      },
+    },
+    { $match: { parent: null } }, 
+  ]);
 
-  const categoryMap = new Map<string, CategoryTree>(
-    categories.map((c) => [
-      c._id.toString(),
-      {
-        _id: c._id.toString(),
-        name: c.name,
-        parent: c.parent?.toString() || null,
-        status: c.status,
-        created_at: c.created_at,
-        updated_at: c.updated_at,
-        children: []
-      }
-    ])
-  );
-
-  const rootCategories: CategoryTree[] = [];
-
-  categoryMap.forEach((category) => {
-    if (category.parent) {
-      const parentCategory = categoryMap.get(category.parent);
-      if (parentCategory) parentCategory.children.push(category);
-    } else {
-      rootCategories.push(category);
-    }
-  });
-
-  return rootCategories;
+  return categories.map((category) => ({
+    _id: category._id.toString(),
+    name: category.name,
+    parent: category.parent ? category.parent.toString() : null,
+    status: category.status,
+    created_at: category.created_at,
+    updated_at: category.updated_at,
+    children: category.children.map((child: any) => ({
+      _id: child._id.toString(),
+      name: child.name,
+      parent: child.parent ? child.parent.toString() : null,
+      status: child.status,
+      created_at: child.created_at,
+      updated_at: child.updated_at,
+    })),
+  }));
 };
 
 
-export const getCategoryById = async (id: string): Promise<CategoryDocument | null> => {
-  return await Category.findById(id);
+export const getCategoryById = async (id: string): Promise<CategoryTree | null> => {
+  const categories = await Category.aggregate([
+    {
+      $match: { _id: new mongoose.Types.ObjectId(id) }, // Match the category by ID
+    },
+    {
+      $graphLookup: {
+        from: "categories",
+        startWith: "$_id",
+        connectFromField: "_id",
+        connectToField: "parent",
+        as: "children",
+      },
+    },
+  ]);
+
+  if (!categories.length) return null; 
+
+  const category = categories[0];     
+  return {
+    _id: category._id.toString(),
+    name: category.name,
+    parent: category.parent ? category.parent.toString() : null,
+    status: category.status,
+    created_at: category.created_at,
+    updated_at: category.updated_at,
+    children: category.children.map((child: any) => ({
+      _id: child._id.toString(),
+      name: child.name,
+      parent: child.parent ? child.parent.toString() : null,
+      status: child.status,
+      created_at: child.created_at,
+      updated_at: child.updated_at,
+    })),
+  };
 };
 
 export const updateCategory = async (id: string, updates: Partial<CategoryDocument>): Promise<CategoryDocument | null> => {

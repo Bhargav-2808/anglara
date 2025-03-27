@@ -14,21 +14,29 @@ export const authenticateUser = async (req: AuthenticatedRequest, res: Response,
 
   const tokenPayload = token?.replace('Bearer ', '');
 
+  console.log(tokenPayload, "tokenPayload")
+
   const decodedToken = jwtVerify(tokenPayload) as unknown as jwtSignPayLoad;
 
   const userId = decodedToken?.sub?.id as string;
+
+  console.log(userId, 'userId')
   
   if (!userId) {
     return ResponseHandler.unAuthorized(res, 'Unauthorized - User not found');
   }
+
   
   const user = await findUserById(userId);
+  console.log(user, "user")
 
   if (!user) {
     return ResponseHandler.unAuthorized(res, 'Unauthorized - User not found');
   }
 
   req.userData = user;
+
+  console.log("auth veridy")
 
   next();
 };
