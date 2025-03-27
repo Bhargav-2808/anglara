@@ -102,7 +102,7 @@ npm run build && npm start
 ---
 
 ## 👥 Contributors
-- **Your Name** - _Project Lead_
+- **Bhargav Valani** 
 
 ## 📜 License
 This project is licensed under the **ISC License**.
