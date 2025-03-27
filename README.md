@@ -95,7 +95,7 @@ npm run build && npm start
 ```
 
 ### **2. Get All Categories (Tree Structure)**
-**GET** `/api/v1/category/tree`
+**GET** `/api/v1/category`
 
 ### **3. Get a Category by ID**
 **GET** `/api/v1/category/:id`
