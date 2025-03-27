@@ -3,6 +3,8 @@
 This is a **Category Management API** built using **Node.js**, **Express**, and **MongoDB (Mongoose)** with TypeScript. It provides CRUD operations for categories, supporting a **nested category structure** with tree representation.
 
 ## Features
+- Authentication for category api
+- Rate Limiting for api
 - Create, Read, Update, and Delete categories
 - Supports **nested categories**
 - Categories are retrievable in **tree structure**
