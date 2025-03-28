@@ -1,4 +1,3 @@
-PORT = 
-ENVIRONMENT =
-DATABASE_URL =
-JWT_SECRET =
+PORT = 8080
+DATABASE_URL = mongodb+srv://bhargavvalani01:Iaz6HrHUGOsMW3yv@anglara.8gvebcq.mongodb.net/
+JWT_SECRET = v@ndIn%hgdsM@chIn%

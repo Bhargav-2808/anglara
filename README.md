@@ -42,9 +42,9 @@ JWT_SECRET=your_secret_key
 ```
 
 ---
+## For Env Check env_example testDb is Given
 
 ## 🚀 Running the Project
-
 ### **Development Mode**
 ```sh
 yarn dev 
