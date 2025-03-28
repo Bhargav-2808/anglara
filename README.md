@@ -3,6 +3,8 @@
 This is a **Category Management API** built using **Node.js**, **Express**, and **MongoDB (Mongoose)** with TypeScript. It provides CRUD operations for categories, supporting a **nested category structure** with tree representation.
 
 ## Features
+- Authentication for category api
+- Rate Limiting for api
 - Create, Read, Update, and Delete categories
 - Supports **nested categories**
 - Categories are retrievable in **tree structure**
@@ -66,7 +68,7 @@ npm run build && npm start
 ###**To Test Endpoint use postman collection available at src/postman_collcetion/category_management_postman_collection.json**
 
 ### **1. Create a User**
-**POST** `/api/v1/register`
+**POST** `/api/v1/auth/register`
 ```json
 {
     "first_name":"Bhargav",
@@ -77,7 +79,7 @@ npm run build && npm start
 ```
 
 ### **1. Login a User**
-**POST** `/api/v1/register`
+**POST** `/api/v1/auth/sign-in`
 ```json
 {
     "email": "bhargavvalani01@gmail.com",
@@ -96,13 +98,13 @@ npm run build && npm start
 ```
 
 ### **2. Get All Categories (Tree Structure)**
-**GET** `/api/v1/category/tree`
+**GET** `/api/v1/category`
 
 ### **3. Get a Category by ID**
 **GET** `/api/v1/category/:id`
 
 ### **4. Update a Category**
-**PATCH** `/api/v1/category/:id`
+**PUT** `/api/v1/category/:id`
 ```json
 {
   "name": "Updated Name",
@@ -111,7 +113,7 @@ npm run build && npm start
 ```
 
 ### **5. Delete a Category**
-**DELETE** `/api/category/:id`
+**DELETE** `/api/v1/category/:id`
 
 ---
 
