@@ -8,6 +8,7 @@ This is a **Category Management API** built using **Node.js**, **Express**, and 
 - Categories are retrievable in **tree structure**
 - When a **parent category is deleted**, its children are reassigned to the grandparent
 - When a **category is marked inactive**, all its subcategories become inactive
+- Dockerized app
 
 ---
 
